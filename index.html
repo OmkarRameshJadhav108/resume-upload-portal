@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Submission Portal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <h2>Apply for Position</h2>
+
+    <label for="name">Full Name</label>
+    <input type="text" name="name" required />
+
+    <label for="email">Email Address</label>
+    <input type="email" name="email" required />
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" name="phone" required />
+
+    <label for="position">Position Applied For</label>
+    <select name="position" required>
+      <option value="">Select a position</option>
+      <option>Frontend Developer</option>
+      <option>Backend Developer</option>
+      <option>Data Analyst</option>
+      <option>UI/UX Designer</option>
+      <option>Project Manager</option>
+    </select>
+
+    <label for="experience">Years of Experience</label>
+    <input type="number" name="experience" min="0" required />
+
+    <label for="skills">Key Skills (comma-separated)</label>
+    <input type="text" name="skills" placeholder="e.g., React, Node.js, SQL" required />
+
+    <label for="education">Highest Education</label>
+    <input type="text" name="education" placeholder="e.g., B.Tech in CSE" required />
+
+    <label for="linkedin">LinkedIn Profile</label>
+    <input type="url" name="linkedin" placeholder="https://linkedin.com/in/yourname" />
+
+    <label for="message">Why should we hire you?</label>
+    <textarea name="message" rows="4" placeholder="Briefly describe your strengths..." required></textarea>
+
+    <label for="resume">Upload Resume</label>
+    <input type="file" name="resume" accept=".pdf,.doc,.docx" required />
+
+    <button type="submit">Submit Application</button>
+  </form>
+</body>
+</html>
