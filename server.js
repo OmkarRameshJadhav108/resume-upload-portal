@@ -1,4 +1,4 @@
-const express = require('express');
+ const express = require('express');
 const multer = require('multer');
 const nodemailer = require('nodemailer');
 const path = require('path');
@@ -12,26 +12,32 @@ const PORT = 3000;
 app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: true }));
 
-// File upload config
+// File upload configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const dir = './uploads';
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
     cb(null, dir);
   },
-  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
-});
-const upload = multer({ storage: storage });
-
-// Nodemailer setup using Gmail App Password
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL_USER,   // your Gmail address
-    pass: process.env.GMAIL_PASS    // your App Password (not regular password)
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
   }
 });
 
+const upload = multer({ storage });
+
+// Nodemailer setup (Gmail App Password)
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS
+  }
+});
+
+// POST route for resume upload
 app.post('/upload', upload.single('resume'), async (req, res) => {
   const {
     name,
@@ -47,12 +53,12 @@ app.post('/upload', upload.single('resume'), async (req, res) => {
 
   const resumePath = req.file?.path;
 
-  // ✅ Check required fields
+  // Validate required fields
   if (!name || !email || !position || !resumePath) {
-    return res.status(400).send("❌ Missing required fields.");
+    return res.status(400).send('❌ Missing required fields.');
   }
 
-  // 📧 Email to Admin
+  // Email to admin
   const adminMail = {
     from: `"Resume Bot" <${process.env.GMAIL_USER}>`,
     to: process.env.ADMIN_EMAIL || process.env.GMAIL_USER,
@@ -60,15 +66,15 @@ app.post('/upload', upload.single('resume'), async (req, res) => {
     text: `
 📥 New Resume Submitted
 
- Name: ${name}
- Email: ${email}
- Phone: ${phone}
- Position: ${position}
- Experience: ${experience} years
- Skills: ${skills}
- Education: ${education}
- LinkedIn: ${linkedin || 'N/A'}
- Why Hire: ${message}
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Position: ${position}
+Experience: ${experience} years
+Skills: ${skills}
+Education: ${education}
+LinkedIn: ${linkedin || 'N/A'}
+Why Hire: ${message}
 
 📎 Resume: ${req.file.originalname}
     `,
@@ -80,7 +86,7 @@ app.post('/upload', upload.single('resume'), async (req, res) => {
     ]
   };
 
-  //  Email to User
+  // Email to applicant
   const userMail = {
     from: `"Resume Bot" <${process.env.GMAIL_USER}>`,
     to: email,
@@ -95,14 +101,12 @@ app.post('/upload', upload.single('resume'), async (req, res) => {
   } catch (err) {
     console.error('❌ Email Error:', err.message);
     res.status(500).send(`
-Your Details Are Succesfully send to us, WE can't send emails back Gmail accounts created in 2022 or later may not support App Passwords is enabled and the account is eligible.
-
-
+Your details were successfully submitted. However, we couldn't send confirmation emails. Gmail accounts created in 2022 or later may require special App Password settings.
     `);
   }
 });
 
+// Start server
 app.listen(PORT, () => {
-  console.log(`OmkarRameshJadhav108
- Server running at http://localhost:${PORT}`);
+  console.log(`OmkarRameshJadhav108\nServer running at http://localhost:${PORT}`);
 });
