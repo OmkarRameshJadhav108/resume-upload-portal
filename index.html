@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
-  <!-- Triggering PR -->  <!-- Triggering PR -->
-
-  
-  
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -15,10 +11,11 @@
       display: flex;
       justify-content: center;
       padding: 40px;
+      margin: 0;
     }
 
     form {
-      background: white;
+      background: #fff;
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
@@ -28,23 +25,27 @@
 
     h2 {
       text-align: center;
-      color: #333;
+      color: #222;
       margin-bottom: 20px;
     }
 
     label {
       display: block;
       margin-top: 15px;
-      font-weight: bold;
+      font-weight: 600;
       color: #333;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       width: 100%;
       padding: 10px;
-      margin-top: 5px;
+      margin-top: 6px;
       border-radius: 6px;
       border: 1px solid #ccc;
+      font-size: 14px;
+      font-family: inherit;
     }
 
     button {
@@ -52,11 +53,13 @@
       width: 100%;
       padding: 12px;
       background: #007BFF;
-      color: white;
+      color: #fff;
       border: none;
       border-radius: 8px;
       font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
 
     button:hover {
@@ -69,20 +72,20 @@
   </style>
 </head>
 <body>
-  <form action="/upload" method="POST" enctype="multipart/form-data">
-    <h2>Apply for Position</h2>
+  <form action="/upload" method="POST" enctype="multipart/form-data" novalidate>
+    <h2>Apply for a Position</h2>
 
     <label for="name">Full Name</label>
-    <input type="text" name="name" required />
+    <input id="name" type="text" name="name" required />
 
     <label for="email">Email Address</label>
-    <input type="email" name="email" required />
+    <input id="email" type="email" name="email" required />
 
     <label for="phone">Phone Number</label>
-    <input type="tel" name="phone" required />
+    <input id="phone" type="tel" name="phone" required />
 
     <label for="position">Position Applied For</label>
-    <select name="position" required>
+    <select id="position" name="position" required>
       <option value="">Select a position</option>
       <option>Frontend Developer</option>
       <option>Backend Developer</option>
@@ -92,22 +95,22 @@
     </select>
 
     <label for="experience">Years of Experience</label>
-    <input type="number" name="experience" min="0" required />
+    <input id="experience" type="number" name="experience" min="0" required />
 
     <label for="skills">Key Skills (comma-separated)</label>
-    <input type="text" name="skills" placeholder="e.g., React, Node.js, SQL" required />
+    <input id="skills" type="text" name="skills" placeholder="e.g., React, Node.js, SQL" required />
 
     <label for="education">Highest Education</label>
-    <input type="text" name="education" placeholder="e.g., B.Tech in CSE" required />
+    <input id="education" type="text" name="education" placeholder="e.g., B.Tech in CSE" required />
 
     <label for="linkedin">LinkedIn Profile</label>
-    <input type="url" name="linkedin" placeholder="https://linkedin.com/in/yourname" />
+    <input id="linkedin" type="url" name="linkedin" placeholder="https://linkedin.com/in/yourname" />
 
     <label for="message">Why should we hire you?</label>
-    <textarea name="message" rows="4" placeholder="Briefly describe your strengths..." required></textarea>
+    <textarea id="message" name="message" rows="4" placeholder="Briefly describe your strengths..." required></textarea>
 
     <label for="resume">Upload Resume</label>
-    <input type="file" name="resume" accept=".pdf,.doc,.docx" required />
+    <input id="resume" type="file" name="resume" accept=".pdf,.doc,.docx" required />
 
     <button type="submit">Submit Application</button>
   </form>
