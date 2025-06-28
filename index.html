@@ -1,9 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Submission Portal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+      margin: 0;
+    }
 
-</html>
-<div style="background: #fff3cd; color: #856404; padding: 16px; border-radius: 8px; border: 1px solid #ffeeba; margin-bottom: 30px; font-size: 14px;">
-  <strong>📢 Reminder:</strong><br />
-  Please follow these official coding style guides:<br />
-  🚀 Swift (iOS): <a href="https://github.com/linkedin/swift-style-guide" target="_blank">LinkedIn Swift Style Guide</a><br />
-  🚀 JavaScript (Frontend): <a href="https://developer.mozilla.org/en-US/docs/MDN/Writing_guidelines/Code_style_guide/JavaScript" target="_blank">MDN JavaScript Guide</a><br />
-  🚀 Java (Backend): <a href="https://www.cs.cornell.edu/courses/JavaAndDS/JavaStyle.html" target="_blank">Cornell Java Guide</a>
-</div>
+    form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+  <form action="/upload" method="POST" enctype="multipart/form-data" novalidate>
+    <h2>Apply for a Position</h2>
+
+    <label for="name">Full Name</label>
+    <input id="name" type="text" name="name" required />
+
+    <label for="email">Email Address</label>
+    <input id="email" type="email" name="email" required />
+
+    <label for="phone">Phone Number</label>
+    <input id="phone" type="tel" name="phone" required />
+
+    <label for="position">Position Applied For</label>
+    <select id="position" name="position" required>
+      <option value="">Select a position</option>
+      <option>Frontend Developer</option>
+      <option>Backend Developer</option>
+      <option>Data Analyst</option>
+      <option>UI/UX Designer</option>
+      <option>Project Manager</option>
+    </select>
+
+    <label for="experience">Years of Experience</label>
+    <input id="experience" type="number" name="experience" min="0" required />
+
+    <label for="skills">Key Skills (comma-separated)</label>
+    <input id="skills" type="text" name="skills" placeholder="e.g., React, Node.js, SQL" required />
+
+    <label for="education">Highest Education</label>
+    <input id="education" type="text" name="education" placeholder="e.g., B.Tech in CSE" required />
+
+    <label for="linkedin">LinkedIn Profile</label>
+    <input id="linkedin" type="url" name="linkedin" placeholder="https://linkedin.com/in/yourname" />
+
+    <label for="message">Why should we hire you?</label>
+    <textarea id="message" name="message" rows="4" placeholder="Briefly describe your strengths..." required></textarea>
+
+    <label for="resume">Upload Resume</label>
+    <input id="resume" type="file" name="resume" accept=".pdf,.doc,.docx" required />
+
+    <button type="submit">Submit Application</button>
+  </form>
+</body>
